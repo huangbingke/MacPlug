@@ -1,0 +1,365 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A7208D2209C64150084F769 /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7208D1209C64150084F769 /* AntiAntiDebug.m */; };
+		0A7208D5209C64150084F769 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A7208D4209C64150084F769 /* fishhook.c */; };
+		0A7208D7209C64150084F769 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A7208D6209C64150084F769 /* fishhook.h */; };
+		0A7208DB209C64150084F769 /* QQMusicHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A7208DA209C64150084F769 /* QQMusicHelper.h */; };
+		0A7208DD209C64150084F769 /* QQMusicHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7208DC209C64150084F769 /* QQMusicHelper.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A7208CD209C64150084F769 /* libQQMusicHelper.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libQQMusicHelper.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A7208D1209C64150084F769 /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AntiAntiDebug.m; path = AntiAntiDebug/AntiAntiDebug.m; sourceTree = "<group>"; };
+		0A7208D4209C64150084F769 /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
+		0A7208D6209C64150084F769 /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
+		0A7208D9209C64150084F769 /* put mac app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put mac app here"; path = "TargetApp/put mac app here"; sourceTree = "<group>"; };
+		0A7208DA209C64150084F769 /* QQMusicHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQMusicHelper.h; sourceTree = "<group>"; };
+		0A7208DC209C64150084F769 /* QQMusicHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QQMusicHelper.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A7208C9209C64150084F769 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A7208C3209C64150084F769 = {
+			isa = PBXGroup;
+			children = (
+				0A7208CF209C64150084F769 /* QQMusicHelper */,
+				0A7208CE209C64150084F769 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0A7208CE209C64150084F769 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A7208CD209C64150084F769 /* libQQMusicHelper.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A7208CF209C64150084F769 /* QQMusicHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0A7208DA209C64150084F769 /* QQMusicHelper.h */,
+				0A7208DC209C64150084F769 /* QQMusicHelper.m */,
+				0A7208D0209C64150084F769 /* AntiAntiDebug */,
+				0A7208D3209C64150084F769 /* fishhook */,
+				0A7208D8209C64150084F769 /* TargetApp */,
+			);
+			path = QQMusicHelper;
+			sourceTree = "<group>";
+		};
+		0A7208D0209C64150084F769 /* AntiAntiDebug */ = {
+			isa = PBXGroup;
+			children = (
+				0A7208D1209C64150084F769 /* AntiAntiDebug.m */,
+			);
+			name = AntiAntiDebug;
+			sourceTree = "<group>";
+		};
+		0A7208D3209C64150084F769 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				0A7208D4209C64150084F769 /* fishhook.c */,
+				0A7208D6209C64150084F769 /* fishhook.h */,
+			);
+			name = fishhook;
+			sourceTree = "<group>";
+		};
+		0A7208D8209C64150084F769 /* TargetApp */ = {
+			isa = PBXGroup;
+			children = (
+				0A7208D9209C64150084F769 /* put mac app here */,
+			);
+			name = TargetApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0A7208CA209C64150084F769 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A7208DB209C64150084F769 /* QQMusicHelper.h in Headers */,
+				0A7208D7209C64150084F769 /* fishhook.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0A7208CC209C64150084F769 /* QQMusicHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A7208E0209C64150084F769 /* Build configuration list for PBXNativeTarget "QQMusicHelper" */;
+			buildPhases = (
+				0A7208C8209C64150084F769 /* Sources */,
+				0A7208C9209C64150084F769 /* Frameworks */,
+				0A7208CA209C64150084F769 /* Headers */,
+				0A7208CB209C64150084F769 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QQMusicHelper;
+			productName = QQMusicHelper;
+			productReference = 0A7208CD209C64150084F769 /* libQQMusicHelper.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A7208C4209C64150084F769 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = tangxianhai;
+				TargetAttributes = {
+					0A7208CC209C64150084F769 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0A7208C7209C64150084F769 /* Build configuration list for PBXProject "QQMusicHelper" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0A7208C3209C64150084F769;
+			productRefGroup = 0A7208CE209C64150084F769 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0A7208CC209C64150084F769 /* QQMusicHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A7208CB209C64150084F769 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /opt/MonkeyDev/Tools/mpack.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A7208C8209C64150084F769 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A7208D5209C64150084F769 /* fishhook.c in Sources */,
+				0A7208DD209C64150084F769 /* QQMusicHelper.m in Sources */,
+				0A7208D2209C64150084F769 /* AntiAntiDebug.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0A7208DE209C64150084F769 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/MFrameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/MFrameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				MonkeyDevPath = /opt/MonkeyDev;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0A7208DF209C64150084F769 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/MFrameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/MFrameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MonkeyDevPath = /opt/MonkeyDev;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0A7208E1209C64150084F769 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LRT8XR3J88;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = "@executable_path/libQQMusicHelper.dylib";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lsubstitute",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0A7208E2209C64150084F769 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LRT8XR3J88;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = "@executable_path/libQQMusicHelper.dylib";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lsubstitute",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A7208C7209C64150084F769 /* Build configuration list for PBXProject "QQMusicHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A7208DE209C64150084F769 /* Debug */,
+				0A7208DF209C64150084F769 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A7208E0209C64150084F769 /* Build configuration list for PBXNativeTarget "QQMusicHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A7208E1209C64150084F769 /* Debug */,
+				0A7208E2209C64150084F769 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A7208C4209C64150084F769 /* Project object */;
+}
