@@ -19,6 +19,9 @@ static NSString * const kTKAutoAuthEnableKey = @"kTKAutoAuthEnableKey";
 static NSString * const kTKAutoLoginEnableKey = @"kTKAutoLoginEnableKey";
 static NSString * const kTKOnTopKey = @"kTKOnTopKey";
 static NSString * const kTKForbidCheckVersionKey = @"kTKForbidCheckVersionKey";
+static NSString * const kTKAlfredEnableKey = @"kTKAlfredEnableKey";
+static NSString * const kTKCheckUpdateWechatEnableKey = @"kTKCheckUpdateWechatEnableKey";
+static NSString * const kTKSystemBrowserEnableKey = @"kTKSystemBrowserEnableKey";
 static NSString * const kTKWeChatResourcesPath = @"/Applications/WeChat.app/Contents/MacOS/WeChatPlugin.framework/Resources/";
 static NSString * const kTKWeChatRemotePlistPath = @"https://raw.githubusercontent.com/TKkk-iOSer/WeChatPlugin-MacOS/master/Other/Products/Debug/WeChatPlugin.framework/Resources/Info.plist";
 
@@ -54,6 +57,9 @@ static NSString * const kTKWeChatRemotePlistPath = @"https://raw.githubuserconte
         _autoLoginEnable = [[NSUserDefaults standardUserDefaults] boolForKey:kTKAutoLoginEnableKey];
         _onTop = [[NSUserDefaults standardUserDefaults] boolForKey:kTKOnTopKey];
         _forbidCheckVersion = [[NSUserDefaults standardUserDefaults] boolForKey:kTKForbidCheckVersionKey];
+        _alfredEnable = [[NSUserDefaults standardUserDefaults] boolForKey:kTKAlfredEnableKey];
+        _checkUpdateWechatEnable = [[NSUserDefaults standardUserDefaults] boolForKey:kTKCheckUpdateWechatEnableKey];
+        _systemBrowserEnable = [[NSUserDefaults standardUserDefaults] boolForKey:kTKSystemBrowserEnableKey];
     }
     return self;
 }
@@ -97,6 +103,24 @@ static NSString * const kTKWeChatRemotePlistPath = @"https://raw.githubuserconte
 - (void)setForbidCheckVersion:(BOOL)forbidCheckVersion {
     _forbidCheckVersion = forbidCheckVersion;
     [[NSUserDefaults standardUserDefaults] setBool:_forbidCheckVersion forKey:kTKForbidCheckVersionKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setAlfredEnable:(BOOL)alfredEnable {
+    _alfredEnable = alfredEnable;
+    [[NSUserDefaults standardUserDefaults] setBool:_alfredEnable forKey:kTKAlfredEnableKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setCheckUpdateWechatEnable:(BOOL)checkUpdateWechatEnable {
+    _checkUpdateWechatEnable = checkUpdateWechatEnable;
+    [[NSUserDefaults standardUserDefaults] setBool:_checkUpdateWechatEnable forKey:kTKCheckUpdateWechatEnableKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setSystemBrowserEnable:(BOOL)systemBrowserEnable {
+    _systemBrowserEnable = systemBrowserEnable;
+    [[NSUserDefaults standardUserDefaults] setBool:_systemBrowserEnable forKey:kTKSystemBrowserEnableKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -194,6 +218,13 @@ static NSString * const kTKWeChatRemotePlistPath = @"https://raw.githubuserconte
         _revokeMsgSet = [NSMutableSet set];
     }
     return _revokeMsgSet;
+}
+
+- (NSMutableSet *)unreadSessionSet {
+    if (!_unreadSessionSet) {
+        _unreadSessionSet = [NSMutableSet set];
+    }
+    return _unreadSessionSet;
 }
 
 #pragma mark - 获取沙盒上的 plist 文件，包括：远程控制，自动回复，置底列表。

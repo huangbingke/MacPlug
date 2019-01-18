@@ -12,7 +12,6 @@
 #import <GCDWebServerDataResponse.h>
 #import <GCDWebServerURLEncodedFormRequest.h>
 #import "TKMessageManager.h"
-#import "XMLReader.h"
 #import "TKCacheManager.h"
 
 @interface TKWebServerManager ()
@@ -23,6 +22,8 @@
 @end
 
 @implementation TKWebServerManager
+
+static int port=52700;
 
 + (instancetype)shareManager {
     static TKWebServerManager *manager = nil;
@@ -45,7 +46,7 @@
     if (self.webServer) {
         return;
     }
-    NSDictionary *options = @{GCDWebServerOption_Port: @52700,
+    NSDictionary *options = @{GCDWebServerOption_Port: [NSNumber numberWithInt:port],
                               GCDWebServerOption_BindToLocalhost: @YES,
                               GCDWebServerOption_ConnectedStateCoalescingInterval: @2,
                               };
@@ -70,6 +71,10 @@
     __weak typeof(self) weakSelf = self;
     
     [self.webServer addHandlerForMethod:@"GET" path:@"/wechat-plugin/user" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
+
+        if (![weakSelf isLocalhost:request.headers[@"Host"]]) {
+             return [GCDWebServerResponse responseWithStatusCode:404];
+        }
         
         NSString *keyword = request.query ? request.query[@"keyword"] ? request.query[@"keyword"] : @"" : @"";
         __block NSMutableArray *sessionList = [NSMutableArray array];
@@ -96,6 +101,12 @@
                 [logic reloadSearchResultDataWithKeyword:keyword completionBlock:^ {
                     hasResult = YES;
                 }];
+            } else if ([logic respondsToSelector:@selector(reloadSearchResultDataWithKeyword:resultContainer:completionBlock:)]) {
+                [logic reloadSearchResultDataWithKeyword:keyword resultContainer:nil completionBlock:^ {
+                    if (logic.searchResultContainer.logicSearchResultFlag == 7) {
+                        hasResult = YES;
+                    }
+                }];
             } else if ([logic respondsToSelector:@selector(reloadSearchResultDataWithCompletionBlock:)]) {
                 [logic reloadSearchResultDataWithCompletionBlock:^ {
                     hasResult = YES;
@@ -103,7 +114,13 @@
             }
         }];
         
-        while (!(hasResult && logic.isContactSearched && logic.isGroupContactSearched && logic.isBrandContactSearched)) {};
+        if ([logic respondsToSelector:@selector(isContactSearched)]) {
+            while (!(hasResult && logic.isContactSearched && logic.isGroupContactSearched && logic.isBrandContactSearched)) {};
+        } else if ([logic respondsToSelector:@selector(clearAllResults)]) {
+             while (!(hasResult && [[logic valueForKey:@"_logicSearchResultFlag"] longLongValue])) {};
+        } else {
+             while (!(hasResult)) {};
+        }
         
         MMChatMangerSearchReportMgr *reportMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("MMChatMangerSearchReportMgr")];
         
@@ -121,15 +138,25 @@
             [sessionList addObject:[weakSelf dictFromContactSearchResult:contact]];
         }];
         
-        [logic clearAllResults];
-        
+        if ([logic respondsToSelector:@selector(clearAllResults)]) {
+            [logic clearAllResults];
+        } else if ([logic respondsToSelector:@selector(clearDataWhenSearchEnd)]) {
+            [logic clearDataWhenSearchEnd];
+        }
+
         return [GCDWebServerDataResponse responseWithJSONObject:sessionList];
+        
     }];
 }
 
 - (void)addHandleForSearchUserChatLog {
     __weak typeof(self) weakSelf = self;
     [self.webServer addHandlerForMethod:@"GET" path:@"/wechat-plugin/chatlog" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
+
+        if (![weakSelf isLocalhost:request.headers[@"Host"]]) {
+            return [GCDWebServerResponse responseWithStatusCode:404];
+        }
+        
         NSString *userId = request.query ? request.query[@"userId"] ? request.query[@"userId"] : nil : nil;
         NSInteger count = request.query ? request.query[@"count"] ? [request.query[@"count"] integerValue] : 30 : 30;
         
@@ -164,7 +191,14 @@
 }
 
 - (void)addHandleForOpenSession {
+    __weak typeof(self) weakSelf = self;
+    
     [self.webServer addHandlerForMethod:@"POST" path:@"/wechat-plugin/open-session" requestClass:[GCDWebServerURLEncodedFormRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerURLEncodedFormRequest * _Nonnull request) {
+
+        if (![weakSelf isLocalhost:request.headers[@"Host"]]) {
+            return [GCDWebServerResponse responseWithStatusCode:404];
+        }
+        
         NSDictionary *requestBody = [request arguments];
         
         if (requestBody && requestBody[@"userId"]) {
@@ -195,9 +229,17 @@
 }
 
 - (void)addHandleForSendMsg {
+    __weak typeof(self) weakSelf = self;
+    
     [self.webServer addHandlerForMethod:@"POST" path:@"/wechat-plugin/send-message" requestClass:[GCDWebServerURLEncodedFormRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerURLEncodedFormRequest * _Nonnull request) {
+
+        if (![weakSelf isLocalhost:request.headers[@"Host"]]) {
+            return [GCDWebServerResponse responseWithStatusCode:404];
+        }
+
         NSDictionary *requestBody = [request arguments];
         NSString *userId = requestBody[@"userId"];
+        
         if (requestBody && userId.length > 0) {
             NSString *content = requestBody[@"content"];
             
@@ -212,11 +254,14 @@
                     [[TKMessageManager shareManager] clearUnRead:requestBody[@"userId"]];
                     
                 } else if (content.length == 0 && requestBody[@"srvId"]) {
-                    NSInteger srvId = [requestBody[@"srvId"] integerValue];
-                    if (srvId != 0) {
-                        MessageData *msgData = [messageService GetMsgData:userId svrId:srvId];
-                        [[TKMessageManager shareManager] playVoiceWithMessageData:msgData];
+                    if (requestBody[@"srvId"]) {
+                        NSInteger srvId = [requestBody[@"srvId"] integerValue];
+                        if (srvId != 0) {
+                            MessageData *msgData = [messageService GetMsgData:userId svrId:srvId];
+                            [[TKMessageManager shareManager] playVoiceWithMessageData:msgData];
+                        }
                     }
+                    [[TKMessageManager shareManager] clearUnRead:userId];
                 }
             });
             return [GCDWebServerResponse responseWithStatusCode:200];
@@ -394,11 +439,6 @@
             [imgMgr downloadImageWithMessage:msgData];
         }
     } else if (msgData.isCustomEmojiMsg || msgData.isEmojiAppMsg) {
-        //        以下注释取的是表情包服务器的地址，这会有一个问题，alfred 无法播放远程 gif 图片
-        //        NSDictionary *msgDict = [self dictWithMessageContent:msgData.msgContent];
-        //        if (msgDict[@"msg"] && msgDict[@"msg"][@"emoji"] && msgDict[@"msg"][@"emoji"][@"cdnurl"]) {
-        //            url = msgDict[@"msg"][@"emoji"][@"cdnurl"];
-        //        } else {
         if ([[TKCacheManager shareManager] fileExistsWithName:msgData.m_nsEmoticonMD5]) {
             url = [[TKCacheManager shareManager] filePathWithName:msgData.m_nsEmoticonMD5];
         } else {
@@ -412,7 +452,7 @@
             title = [title stringByAppendingString:msgData.msgVoiceText];
         }
         if (msgData.IsUnPlayed) {
-            title = [NSString stringWithFormat:@"%@%@",TKLocalizedString(@"assistant.search.message.unread"),title];
+            title = [NSString stringWithFormat:@"%@(%@)",title,TKLocalizedString(@"assistant.search.message.unread")];
         }
     } else if (msgData.messageType == 49) {
         NSString *msgContact = [msgData summaryString:NO];
@@ -448,17 +488,7 @@
              };
 }
 
-- (NSDictionary *)dictWithMessageContent:(NSString *)msg {
-    
-    NSError *error;
-    //      转换群聊的 msg
-    NSString *msgContent = [msg substringFromIndex:[msg rangeOfString:@"<msg"].location];
-    
-    NSDictionary *msgDict = [XMLReader dictionaryForXMLString:msgContent error:&error];
-    
-    return error? nil : msgDict;
-}
-- (NSString *)getDateStringWithTimeStr:(NSTimeInterval)time{
+- (NSString *)getDateStringWithTimeStr:(NSTimeInterval)time {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     if ([date isToday]) {
@@ -495,6 +525,13 @@
         }
     }
     return userName ?: @"";
+}
+
+- (BOOL)isLocalhost:(NSString *)host {
+    NSArray *localhostUrls = @[[NSString stringWithFormat:@"127.0.0.1:%d", port],
+                               [NSString stringWithFormat:@"localhost:%d", port]
+                               ];
+    return [localhostUrls containsObject:host];
 }
 
 @end

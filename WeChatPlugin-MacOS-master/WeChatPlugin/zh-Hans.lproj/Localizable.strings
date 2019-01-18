@@ -16,7 +16,10 @@
 "assistant.menu.remoteControl" = "远程控制mac";
 "assistant.menu.windowSticky" = "微信窗口置顶";
 "assistant.menu.freeLogin" = "免认证登录";
+"assistant.menu.systemBrowser" = "使用系统浏览器";
+"assistant.menu.forbidCheck" = "禁止微信启动时检测更新";
 "assistant.menu.other" = "小助手🌚";
+"assistant.menu.enableAlfred" = "开启 Alfred 功能";
 "assistant.menu.updateAssistant" = "更新小助手…";
 "assistant.menu.aboutAssistant" = "关于小助手";
 
@@ -42,6 +45,7 @@
 "assistant.chat.readAll" = "一键已读";
 "assistant.chat.clearEmpty" = "清除空会话";
 "assistant.chat.remove" = "移除";
+"assistant.chat.unread" = "标记未读";
 
 //  远程控制相关
 "assistant.remoteControl.getList" = "获取指令";
@@ -63,6 +67,7 @@
 "Assistant.Directive.Shutdown" = "关机";
 "Assistant.Directive.Restart" = "重启";
 "Assistant.Directive.EmptyTrash" = "清空废纸篓";
+"Assistant.Directive.Mute" = "静音";
 "Assistant.Directive.KillQQ" = "退出 QQ";
 "Assistant.Directive.KillWeChat" = "退出 WeChat";
 "Assistant.Directive.KillChrome" = "退出 Chrome";

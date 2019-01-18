@@ -34,6 +34,7 @@
                 NSString *versionMsg = [localInfo[@"versionInfo"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
                 finish(TKVersionStatusOld, versionMsg);
             } else if (romoteInfo[@"versionInfo"]) {
+                if (![romoteInfo[@"showUpdateWindow"] boolValue]) return;
                 NSString *versionMsg = [romoteInfo[@"versionInfo"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
                 finish(TKVersionStatusNew, versionMsg);
             }

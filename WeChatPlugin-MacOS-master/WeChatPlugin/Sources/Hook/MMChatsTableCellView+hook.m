@@ -88,12 +88,15 @@
     
     NSMenuItem *removeSessionItem = [[NSMenuItem alloc] initWithTitle:TKLocalizedString(@"assistant.chat.remove") action:@selector(contextMenuRemoveSession) keyEquivalent:@""];
 
+    NSMenuItem *unreadSessionItem = [[NSMenuItem alloc] initWithTitle:TKLocalizedString(@"assistant.chat.unread") action:@selector(contextMenuUnreadSession) keyEquivalent:@""];
+
     [arg1 addItems:@[[NSMenuItem separatorItem],
                      preventRevokeItem,
                      multipleSelectionItem,
                      clearUnReadItem,
                      clearEmptySessionItem,
-                     removeSessionItem
+                     removeSessionItem,
+                     unreadSessionItem
                      ]];
     [self hook_menuWillOpen:arg1];
 }
@@ -131,7 +134,11 @@
             [sessionMgr UnmuteSessionByUserName:sessionInfo.m_nsUserName];
         }
     }
-    [sessionMgr sortSessions];
+    if ([sessionMgr respondsToSelector:@selector(FFDataSvrMgrSvrFavZZ)]) {
+        [sessionMgr FFDataSvrMgrSvrFavZZ];
+    } else if ([sessionMgr respondsToSelector:@selector(sortSessions)]){
+        [sessionMgr sortSessions];
+    }
     [[TKWeChatPluginConfig sharedConfig] saveIgnoreSessionModels];
 }
 
@@ -201,6 +208,18 @@
     }
 }
 
+- (void)contextMenuUnreadSession {
+    MMSessionInfo *sessionInfo = [(MMChatsTableCellView *)self sessionInfo];
+    if (sessionInfo.m_uUnReadCount > 0) return;
+    
+    NSMutableSet *unreadSessionSet = [[TKWeChatPluginConfig sharedConfig] unreadSessionSet];
+    if ([unreadSessionSet containsObject:sessionInfo.m_nsUserName]) return;
+    
+    [unreadSessionSet addObject:sessionInfo.m_nsUserName];
+    MMSessionMgr *sessionMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("MMSessionMgr")];
+    [sessionMgr changeSessionUnreadCountWithUserName:sessionInfo.m_nsUserName to:sessionInfo.m_uUnReadCount + 1];
+}
+
 - (void)hook_contextMenuSticky:(id)arg1 {
     [self hook_contextMenuSticky:arg1];
     
@@ -224,7 +243,11 @@
         if (sessionInfo.m_bShowUnReadAsRedDot && sessionInfo.m_nsUserName) {
             [sessionMgr UnmuteSessionByUserName:sessionInfo.m_nsUserName];
         }
-        [sessionMgr sortSessions];
+        if ([sessionMgr respondsToSelector:@selector(FFDataSvrMgrSvrFavZZ)]) {
+            [sessionMgr FFDataSvrMgrSvrFavZZ];
+        } else if ([sessionMgr respondsToSelector:@selector(sortSessions)]){
+            [sessionMgr sortSessions];
+        }
         [[TKWeChatPluginConfig sharedConfig] saveIgnoreSessionModels];
     }
 }

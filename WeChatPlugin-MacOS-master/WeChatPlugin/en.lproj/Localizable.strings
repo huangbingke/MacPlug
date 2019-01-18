@@ -16,7 +16,10 @@
 "assistant.menu.remoteControl" = "Remote Control";
 "assistant.menu.windowSticky" = "Sticky on Top";
 "assistant.menu.freeLogin" = "AutoAuth Login";
+"assistant.menu.systemBrowser" = "Use System Browser";
+"assistant.menu.forbidCheck" = "Forbid WeChat Check Update";
 "assistant.menu.other" = "Others";
+"assistant.menu.enableAlfred" = "Enable Alfred";
 "assistant.menu.updateAssistant" = "Update Assistant…";
 "assistant.menu.aboutAssistant" = "About Assistant";
 
@@ -42,6 +45,7 @@
 "assistant.chat.readAll" = "Mark All As Read";
 "assistant.chat.clearEmpty" = "Clear All Empty Session";
 "assistant.chat.remove" = "remove";
+"assistant.chat.unread" = "Unread";
 
 //  Remote Control
 "assistant.remoteControl.getList" = "Directive";
@@ -63,6 +67,7 @@
 "Assistant.Directive.Shutdown" = "Shut Down";
 "Assistant.Directive.Restart" = "Restart";
 "Assistant.Directive.EmptyTrash" = "Empty Trash";
+"Assistant.Directive.Mute" = "Mute";
 "Assistant.Directive.KillQQ" = "Kill QQ";
 "Assistant.Directive.KillWeChat" = "Kill WeChat";
 "Assistant.Directive.KillChrome" = "Kill Chrome";
